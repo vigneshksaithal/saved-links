@@ -1,0 +1,97 @@
+<html>
+  <head>
+    <!-- freshworks crayons js -->
+    <script
+      type="module"
+      src="https://unpkg.com/@freshworks/crayons/dist/crayons/crayons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/@freshworks/crayons/dist/crayons/crayons.js"
+    ></script>
+    <!-- fresh client js -->
+    <script src="https://static.freshdev.io/fdk/2.0/assets/fresh_client.js"></script>
+    <link rel="stylesheet" type="text/css" href="styles/style.css" />
+  </head>
+  <body>
+    <section id="app-body">
+      <div
+        class="py-4"
+        :style="[showAddLinkForm ? 'display: block' : 'display: none']"
+      >
+        <h4>Add link</h4>
+        <fw-input
+          type="text"
+          placeholder="Title"
+          :value="newTitle"
+          @input="newTitle = $event.target.value"
+        >
+        </fw-input>
+        <fw-input
+          type="text"
+          placeholder="Link"
+          :value="newLink"
+          @input="newLink = $event.target.value"
+        >
+        </fw-input>
+        <div class="flex justify-end">
+          <fw-button
+            class="self-end mr-2"
+            name="plus"
+            color="text"
+            @click="showAddLinkForm = false"
+            >Cancel</fw-button
+          >
+          <fw-button
+            class="self-end"
+            name="plus"
+            color="secondary"
+            @click="saveLink"
+            >Save link</fw-button
+          >
+        </div>
+      </div>
+      <div class="flex justify-end">
+        <fw-button
+          name="plus"
+          color="secondary"
+          @click="showAddLinkForm = true"
+          :style="[!showAddLinkForm ? 'display: block' : 'display: none']"
+          >+ Add link</fw-button
+        >
+      </div>
+      <div>
+        <div v-if="links.length !== 0">
+          <div class="card btn" v-for="link, index in links">
+            <div class="title btn">{{ link.title }}</div>
+            <span class="link btn" :aria-label="link.url">{{ link.url }}</span>
+            <fw-icon
+              name="copy"
+              size="14"
+              color="grey"
+              class="icon-copy btn"
+              :aria-label="link.url"
+            ></fw-icon>
+            <fw-icon
+              name="delete"
+              size="14"
+              color="grey"
+              class="icon-edit"
+              @click="deleteLink(index)"
+            ></fw-icon>
+          </div>
+        </div>
+        <div v-else class="flex">No links to show</div>
+      </div>
+    </section>
+    <!-- vuejs 3 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@3.2.20/dist/vue.global.min.js"></script>
+    <!-- clipboard js -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js"
+      integrity="sha256-Eb6SfNpZyLYBnrvqg4KFxb6vIRg+pLg9vU5Pv5QTzko="
+      crossorigin="anonymous"
+    ></script>
+    <script src="scripts/app.js"></script>
+  </body>
+</html>
