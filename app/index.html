@@ -9,80 +9,85 @@
       nomodule
       src="https://unpkg.com/@freshworks/crayons/dist/crayons/crayons.js"
     ></script>
+    <link rel="stylesheet" type="text/css" href="styles/style.css" />
     <!-- fresh client js -->
     <script src="https://static.freshdev.io/fdk/2.0/assets/fresh_client.js"></script>
-    <link rel="stylesheet" type="text/css" href="styles/style.css" />
   </head>
   <body>
     <section id="app-body">
-      <div
-        class="py-4"
-        :style="[showAddLinkForm ? 'display: block' : 'display: none']"
-      >
-        <h4>Add link</h4>
-        <fw-input
-          type="text"
-          placeholder="Title"
-          :value="newTitle"
-          @input="newTitle = $event.target.value"
-        >
-        </fw-input>
-        <fw-input
-          type="text"
-          placeholder="Link"
-          :value="newLink"
-          @input="newLink = $event.target.value"
-        >
-        </fw-input>
-        <div class="flex justify-end">
-          <fw-button
-            class="self-end mr-2"
-            name="plus"
-            color="text"
-            @click="showAddLinkForm = false"
-            >Cancel</fw-button
+      <transition name="fade">
+        <div class="py-4" v-if="showAddLinkForm">
+          <h4>Add link</h4>
+          <fw-input
+            type="text"
+            placeholder="Title"
+            :value="newTitle"
+            @input="newTitle = $event.target.value"
           >
-          <fw-button
-            class="self-end"
-            name="plus"
-            color="secondary"
-            @click="saveLink"
-            >Save link</fw-button
+          </fw-input>
+          <fw-input
+            type="text"
+            placeholder="Link"
+            :value="newLink"
+            @input="newLink = $event.target.value"
           >
+          </fw-input>
+          <div class="flex justify-end mt-2">
+            <fw-button
+              class="self-end mr-2"
+              name="plus"
+              color="text"
+              @click="showAddLinkForm = false"
+              >Cancel</fw-button
+            >
+            <fw-button
+              class="self-end"
+              name="plus"
+              color="primary"
+              @click="saveLink"
+              >Save</fw-button
+            >
+          </div>
         </div>
-      </div>
-      <div class="flex justify-end">
-        <fw-button
-          name="plus"
-          color="secondary"
-          @click="showAddLinkForm = true"
-          :style="[!showAddLinkForm ? 'display: block' : 'display: none']"
+      </transition>
+      <div class="flex justify-between mb-2" v-if="!showAddLinkForm">
+        <div class="align-middle">Your Links</div>
+        <fw-button color="secondary" @click="showAddLinkForm = true"
           >+ Add link</fw-button
         >
       </div>
-      <div>
-        <div v-if="links.length !== 0">
-          <div class="card btn" v-for="link, index in links">
-            <div class="title btn">{{ link.title }}</div>
-            <span class="link btn" :aria-label="link.url">{{ link.url }}</span>
-            <fw-icon
-              name="copy"
-              size="14"
-              color="grey"
-              class="icon-copy btn"
+      <transition name="fade">
+        <div v-if="links !== null">
+          <div class="card" v-for="link, index in links">
+            <div class="flex justify-between mb-1">
+              <div class="card-title">{{ link.title }}</div>
+              <div class="flex">
+                <fw-icon
+                  name="copy"
+                  size="14"
+                  color="grey"
+                  class="icon-copy mr-2"
+                  :aria-label="link.url"
+                ></fw-icon>
+                <fw-icon
+                  name="delete"
+                  size="14"
+                  color="grey"
+                  @click="deleteLink(index)"
+                ></fw-icon>
+              </div>
+            </div>
+            <a
+              class="card-url"
+              :href="link.url"
               :aria-label="link.url"
-            ></fw-icon>
-            <fw-icon
-              name="delete"
-              size="14"
-              color="grey"
-              class="icon-edit"
-              @click="deleteLink(index)"
-            ></fw-icon>
+              target="_blank"
+              >{{ link.url }}</a
+            >
           </div>
         </div>
-        <div v-else class="flex">No links to show</div>
-      </div>
+        <div v-else class="flex justify-center pt-10">No links to show</div>
+      </transition>
     </section>
     <!-- vuejs 3 -->
     <script src="https://cdn.jsdelivr.net/npm/vue@3.2.20/dist/vue.global.min.js"></script>
