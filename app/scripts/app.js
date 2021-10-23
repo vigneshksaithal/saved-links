@@ -28,6 +28,8 @@ const App = {
   },
   methods: {
     init() {
+      this.clearInput();
+
       client.db.get('user').then(
         function (data) {
           vm.links = data.links;
@@ -38,10 +40,6 @@ const App = {
       );
     },
 
-    /**
-     * @param {string} this.newTitle - title of new link to be saved
-     * @param {string} this.newLink - url of new link to be saved
-     */
     saveLink() {
       client.db
         .update('user', 'append', {
@@ -51,7 +49,7 @@ const App = {
           function (data) {
             console.log(data);
             vm.showAddLinkForm = false;
-            vm.showNotify('Link saved successfully!');
+            vm.notify('success', 'Link saved successfully!');
             vm.clearInputFields();
           },
           function (error) {
@@ -80,11 +78,16 @@ const App = {
             },
             function (error) {
               console.error(`Some error Encountered: ${error}`);
+              vm.notify(
+                'success',
+                'Error while deleting link. Please report the issue on'
+              );
             }
           );
       });
     },
 
+    /* Trigger notify */
     notify(type, text) {
       client.interface
         .trigger('showNotify', {
@@ -109,8 +112,9 @@ const App = {
 
 var vm = Vue.createApp(App).mount('#app-body');
 
-new ClipboardJS('.btn', {
+new ClipboardJS('.icon-copy', {
   text: function (trigger) {
+    vm.notify('info', 'Link copied');
     return trigger.getAttribute('aria-label');
   },
 });
