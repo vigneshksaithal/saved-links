@@ -10,11 +10,15 @@ html {
 
 #app-body {
   font-family: Helvetica, sans-serif;
-  padding: 0.2rem;
+  padding: 0.4rem;
 }
 
 .flex {
   display: flex;
+}
+
+.title {
+  padding: 8px;
 }
 
 .justify-end {
@@ -22,61 +26,63 @@ html {
 }
 
 .justify-center {
-  justify-content: flex-center;
+  justify-content: center;
 }
 
-.self-end {
-  align-self: flex-end;
-}
-
-.inline {
-  display: inline;
+.justify-between {
+  justify-content: space-between;
 }
 
 .mr-2 {
   margin-right: 0.5rem;
 }
 
-.py-4 {
-  padding-top: 0.2rem;
-  padding-bottom: 0.6rem;
+.mb-2 {
+  margin-bottom: 1rem;
 }
 
-.w-full {
-  width: 100%;
+.py-4 {
+  padding-top: 0.2rem;
+  padding-bottom: 0.8rem;
+}
+
+.mt-2 {
+  padding-top: 0.5rem;
+}
+
+.pt-10 {
+  padding-top: 2.5rem;
 }
 
 .card {
   width: 100%;
-  min-height: 30px;
-  position: relative;
-  border: 1.5px solid #0091c2;
-  border-radius: 4px;
-  box-shadow: 0.25px 0.25px 1px grey;
+  min-height: 2.4rem;
   margin-top: 10px;
-  padding: 0.6rem;
+  padding: 0.8rem;
+  position: relative;
+  border-radius: 0.25rem;
+  box-shadow: 0.01rem 0.01rem 0.1rem #696969;
   word-wrap: break-word;
 }
 
-.card > .title {
-  font-size: 0.9rem;
-  font-weight: bold;
-  color: #0091c2;
-  margin-bottom: 4px;
+.card-title {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #4e8ce9;
+  margin-bottom: 0.6rem;
 }
 
-.card > .link {
-  font-size: 0.85rem;
+.card-url {
+  font-size: 0.8rem;
+  color: #758283;
 }
 
-.icon-copy {
-  position: absolute;
-  top: 6px;
-  right: 28px;
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s ease;
 }
 
-.icon-edit {
-  position: absolute;
-  top: 6px;
-  right: 6px;
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
 }
