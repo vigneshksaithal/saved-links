@@ -46,17 +46,15 @@ const App = {
           links: [{ title: this.newTitle, url: this.newLink }],
         })
         .then(
-          function (data) {
-            console.log(data);
+          function () {
             vm.showAddLinkForm = false;
             vm.notify('success', 'Link saved successfully!');
             vm.clearInputFields();
           },
           function (error) {
-            console.error(`Some error Encountered: ${error}`);
+            notify('danger', `Some error Encountered: ${error}`);
           }
         );
-
       this.init();
     },
 
@@ -78,10 +76,7 @@ const App = {
             },
             function (error) {
               console.error(`Some error Encountered: ${error}`);
-              vm.notify(
-                'success',
-                'Error while deleting link. Please report the issue on'
-              );
+              vm.notify('success', `Some error Encountered: ${error}`);
             }
           );
       });
