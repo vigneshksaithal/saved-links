@@ -68,13 +68,15 @@ html {
 .card-title {
   font-size: 1rem;
   font-weight: 500;
-  color: #4e8ce9;
+  color: hsl(216, 78%, 50%);
   margin-bottom: 0.6rem;
+  margin-right: 0.2rem;
 }
 
 .card-url {
-  font-size: 0.8rem;
-  color: #758283;
+  font-size: 0.85rem;
+  font-weight: 400;
+  color: hsl(0, 0%, 54%);
 }
 
 .fade-enter-active,

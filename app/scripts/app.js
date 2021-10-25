@@ -109,7 +109,7 @@ var vm = Vue.createApp(App).mount('#app-body');
 
 new ClipboardJS('.icon-copy', {
   text: function (trigger) {
-    vm.notify('info', 'Link copied');
+    vm.notify('info', 'Link copied successfully!');
     return trigger.getAttribute('aria-label');
   },
 });

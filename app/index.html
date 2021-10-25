@@ -57,7 +57,7 @@
         >
       </div>
       <transition name="fade">
-        <div v-if="links !== null">
+        <div v-if="links.length !== 0">
           <div class="card" v-for="link, index in links">
             <div class="flex justify-between mb-1">
               <div class="card-title">{{ link.title }}</div>
